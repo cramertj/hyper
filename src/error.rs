@@ -17,6 +17,7 @@ use self::Error::{
     Status,
     Timeout,
     Upgrade,
+    Closed,
     Cancel,
     Io,
     TooLarge,
@@ -50,6 +51,8 @@ pub enum Error {
     Upgrade,
     /// A pending item was dropped before ever being processed.
     Cancel(Canceled),
+    /// Indicates a connection is closed.
+    Closed,
     /// An `io::Error` that occurred while trying to read or write to a network stream.
     Io(IoError),
     /// Parsing a field as string failed
@@ -121,6 +124,7 @@ impl StdError for Error {
             Incomplete => "message is incomplete",
             Timeout => "timeout",
             Upgrade => "unsupported protocol upgrade",
+            Closed => "connection is closed",
             Cancel(ref e) => e.description(),
             Uri(ref e) => e.description(),
             Io(ref e) => e.description(),

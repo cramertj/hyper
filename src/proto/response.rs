@@ -102,6 +102,8 @@ impl<B> Response<B> {
     /// Read the body.
     #[inline]
     pub fn body_ref(&self) -> Option<&B> { self.body.as_ref() }
+
+    pub(crate) fn body_mut(&mut self) -> &mut Option<B> { &mut self.body }
 }
 
 impl Response<Body> {
